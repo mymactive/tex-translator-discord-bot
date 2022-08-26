@@ -1,0 +1,1 @@
+# tex-translator-discord-bot

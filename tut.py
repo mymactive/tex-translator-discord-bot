@@ -2,6 +2,11 @@
 
 from pydoc import cli
 import discord
+import sys
+import numpy as np
+
+# コマンドライン引数を受け取る
+args = sys.argv
 
 
 class MyClient(discord.Client):
@@ -19,5 +24,8 @@ intents = discord.Intents.default()
 intents.message_content = True
 
 client = MyClient(intents=intents)
-client.run(
-    'MTAxMjY4NzQ0NTk4NjM4NTk4MA.GjteEJ.XbPLWfnKh1Xi95CI5bFU8ru5PI0pPe1Bz2HvZ0')
+
+token = 'mytoken'
+with open(args[1]) as f:
+    token = f.readline()
+client.run(token)

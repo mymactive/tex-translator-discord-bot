@@ -1,0 +1,1 @@
+lualatex -halt-on-error -interaction=nonstopmode -file-line-error --jobname=fig structure.tex

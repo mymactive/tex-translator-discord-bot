@@ -23,11 +23,18 @@ class MyClient(discord.Client):
     async def on_message(self, message):
         print(f'Message from {message.author}: {message.content}')
         # もし'$'から始まるメッセージを受けとったら
-        if message.content.startswith('$'):
+        if message.content.startswith('$') or \
+           message.content.startswith('!') or \
+           message.content.startswith('\\'):
             # ./latex_src/main.texファイルを書込みモードで開く。
             with open('main.tex', 'w') as f:
                 # メッセージの内容を./latex_src/main.texに書き込む。
-                f.write(message.content)
+                if message.content.startswith('!'):
+                    f.write(message.content[1:])
+                elif message.content.startswith('\\'):
+                    f.write('$' + message.content + '$')
+                else:
+                    f.write(message.content)
             subprocess.Popen('tex2img structure.tex fig.png',
                              shell=True).communicate()
             # 生成したものが'fig.png'として出力されるので、これを読み込み、sendする。
